@@ -1,0 +1,7 @@
+{
+  "productName": "My Electron App",
+  "appId": "com.example.myapp",
+  "directories": {
+    "output": "dist"
+  }
+}

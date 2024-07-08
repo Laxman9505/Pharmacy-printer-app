@@ -59,6 +59,7 @@
       );
 
       // Print store details and header
+
       printer.alignCenter();
       printer.bold(true);
       printer.setTextSize(1, 1);
@@ -66,8 +67,9 @@
       printer.setTextNormal();
 
       printer.println(`  ${storeAddress}`);
-      printer.println(`  ${orderDate}`);
-      printer.println(`Phone:  ${phoneNumber}`);
+      printer.println(`Phone: ${phoneNumber}`);
+      printer.println(`DDA Reg. No: 3801026/20355`);
+      printer.println(`PAN No: 102214756`);
 
       printer.println(`  Reciept`);
 
@@ -79,6 +81,7 @@
       printer.alignLeft();
 
       printer.println(`Order No.: ${orderNumber}`);
+      printer.println(`Date: ${orderDate}`);
 
       if (customerName) {
         printer.println(`Customer: ${customerName}`);
@@ -91,9 +94,10 @@
       printer.newLine();
       printer.drawLine();
       printer.tableCustom([
-        { text: "Items", width: 0.7, bold: true, align: "LEFT" },
+        { text: "Items", width: 0.5, bold: true, align: "LEFT" },
         { text: "Qty", width: 0.1, bold: true, align: "LEFT" },
-        { text: "Price", width: 0.2, bold: true, align: "LEFT" },
+        { text: "Rate", width: 0.2, bold: true, align: "LEFT" },
+        { text: "Amount", width: 0.2, bold: true, align: "LEFT" },
       ]);
 
       receipt?.products?.forEach((item, index1) => {
@@ -105,15 +109,17 @@
         // Format the item name, quantity, and price
         const itemName = splitString(item.productName, 20);
         const itemQuantity = item.quantity;
-        const itemPrice = `Rs ${item.boughtPrice}`;
+        const itemPrice = `${item.boughtPrice}`;
+        const totalPrice = `${Number(item.boughtPrice) * itemQuantity}`;
 
         printer.tableCustom([
           {
-            text: `${index1 + 1 + ")" + itemName}`,
-            width: 0.7,
+            text: `${index1 + 1 + ")  " + itemName}`,
+            width: 0.5,
           },
           { text: itemQuantity, width: 0.1 },
           { text: itemPrice, width: 0.2 },
+          { text: totalPrice, width: 0.2 },
         ]);
       });
       // if (
@@ -391,10 +397,10 @@
       printer.drawLine();
 
       printer.alignRight();
-      printer.println(`   Subtotal:    Rs ${subTotal}`);
+      printer.println(`   Subtotal:    ${subTotal}`);
 
-      printer.println(`   Discount:    Rs ${discountAmount}`);
-      printer.println(`   Total:  Rs ${totalPrice}`);
+      printer.println(`   Discount:    ${discountAmount}`);
+      printer.println(`   Total:  ${totalPrice}`);
       // printer.newLine();
       // printer.newLine();
       // printer.alignCenter();
